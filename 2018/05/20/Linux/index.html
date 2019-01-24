@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="keywords" content="Linux,ssh,虚拟机,Centos">
+<meta property="og:type" content="article">
+<meta property="og:title" content="虚拟机的安装和ssh无密码登录">
+<meta property="og:url" content="http://yoursite.com/2018/05/20/Linux/index.html">
+<meta property="og:site_name" content="Cheerui&#39;s blog">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/Linux/weilannvhai.jpeg">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/Linux/anzhuang2.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/Linux/anzhuang.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/Linux/rootmima.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/Linux/wancheng.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/Linux/yonghu.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/Linux/denglu.png">
+<meta property="og:updated_time" content="2019-01-23T14:50:11.233Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="虚拟机的安装和ssh无密码登录">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/20/Linux/weilannvhai.jpeg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/20/Linux/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>虚拟机的安装和ssh无密码登录 | Cheerui's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cheerui's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/20/Linux/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cheerui"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/blog.png"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cheerui's blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">虚拟机的安装和ssh无密码登录
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建于：2018-05-20 16:11:21" itemprop="dateCreated datePublished" datetime="2018-05-20T16:11:21+08:00">2018-05-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="更新于：2019-01-23 22:50:11" itemprop="dateModified" datetime="2019-01-23T22:50:11+08:00">2019-01-23</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/20/Linux/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/20/Linux/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/05/20/Linux/" class="leancloud_visitors" data-flag-title="虚拟机的安装和ssh无密码登录">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/2018/05/20/Linux/weilannvhai.jpeg" alt="围栏女孩"><br><a id="more"></a><br>今天刚学了ssh的无密码登录 着急写篇博客 感觉这个好厉害(最重要的是怕自己忘了)<br>ssh有两种机制 一种是<strong>公钥机制</strong><br>另一种是<strong>私钥机制</strong><br>今天写的这篇属于第二种<strong>私钥机制</strong><br>这种更为安全一些</p>
+<h2 id="创建以Centos为系统的虚拟机"><a href="#创建以Centos为系统的虚拟机" class="headerlink" title="创建以Centos为系统的虚拟机"></a>创建以Centos为系统的虚拟机</h2><blockquote>
+<p>首先创建两台虚拟机(这里用的是Centos系统镜像)Centos是属于RedHat的一种,这种系统企业中用的比较多<br>用的虚拟机软件是Oracle公司的VM VirtualBox(当然可以用vmware,个人感觉vmware要更好一些)<br>先说一下怎么安装这个Centos镜像吧(VirtualBox下的安装步骤),毕竟安装过一遍了,第二遍感觉还不是熟练.</p>
+<ul>
+<li>首先将VirtualBox安装在pc上,然后找到<a href="https://pan.baidu.com/s/1wO8YG-IMs31feQXZZ4HuWQ" target="_blank" rel="noopener">Centos</a>(点击下载)的镜像,下面就开始安装</li>
+<li>1.点击新建,会弹出一个对话框在这里选择版本,选择系统类型(系统类型根据自己本机操作系统为主,本机是多少位就选多少位),因为这里找不到Centos类型的,我们选择RedHat,,名称自己起,然后一直下一步.</li>
+<li>2.然后知道选择文件位置和大小的时候这里选择想要安装的路径,空间差不多就行,我一般都是20G,然后点击创建.</li>
+<li>3.然后你会发现在你左边的栏里已经多了一个东西,至此一个小电脑就创建好了.(现在相当于有了一堆硬件,但是没有操作系统)</li>
+<li>4.操作系统的安装,如下图所示.<br><img src="/2018/05/20/Linux/anzhuang2.png" alt="安装"></li>
+</ul>
+</blockquote>
+<p><img src="/2018/05/20/Linux/anzhuang.png" alt="安装"></p>
+<ul>
+<li>5.上面操作完成后,双击虚拟机,待会会进入一个图形化界面(有的会发现鼠标在里面出不来了,按一下键盘右面的ctrl就可以自由活动了).然后点击install to hard drive(桌面上有),至此又进入一个图形化界面,<br>进入之后将鼠标移动到右边的滚动条上,向下拖.</li>
+<li>6.点击next,没有中文,不要找了,选择<code>U.S English</code>,一路next,中间有对话框弹出就yes,<code>hostname</code>想改就改不改也行.然后选择时区,这里找Asia ShangHai(国际化大都市,找半天北京没找着…).</li>
+<li>8.然后会发现让你设置密码的框框,如下图.这里设置的是你的root密码(最高权限密码),一定要记住,然后一路next,最后弹出对话框,选择write..disk这个,然后会看到下图,就是正在安装了.安装完成后会出现下图界面(blingbling的电脑标志,并带有祝贺的语句)<br><img src="/2018/05/20/Linux/rootmima.png" alt="root"><br><img src="/2018/05/20/Linux/wancheng.png" alt="成功"></li>
+<li>7.安装完成后,将上面改动的驱动的顺序(就是点击上图标5~6的那个地方)改动到从硬盘启动.这就算安装完成了.</li>
+<li>10.再次双击那个小电脑,他就会启动这台机器,现在相当于就是一台电脑了,进去之后是个图形化界面,然后按右边的Ctrl键,将右边的进度条下拉,然后点击forword,直到出现下图的情况.<br><img src="/2018/05/20/Linux/yonghu.png" alt="创建"></li>
+<li>11.这里是让你建议一个使用者,创建用户名和密码.创建完成后forward finish,进入登录界面.如下图<br><img src="/2018/05/20/Linux/denglu.png" alt="登录"></li>
+<li><ol>
+<li>选择other就是选择其他用户,如果你想使用最高权限就将用户名输入root,然后输入对应的密码.你也可以用你新建的账户登录.<br><strong>以上就是虚拟机的安装步骤</strong><h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2>虚拟机安装好后进行网络配置</li>
+</ol>
+</li>
+<li>1.安装还后默认的网络模式是网络地址转换(NAT) 这时外网是访问不了我们虚拟机的,我们虚拟机是可以上外网的,是依托于我们本机的操作系统的</li>
+<li>2.想要让外网访问我们的虚拟机,可以采用下面两种方式</li>
+<li>3.方式一 同时采用两块网卡,一块用网络地址转换(NAT),另一块采用仅主机(host-only)网络,前面那一块是让我们连接外网,后面这一块是让外网可以访问我们的.</li>
+<li>4.方式二 采用桥接网卡,这就相当于真正的给他分配了一个IP地址,这个 ip既可以让我们连接外网,又可以让外网连接我们.(下面将采用方式一)<h2 id="无密码登录"><a href="#无密码登录" class="headerlink" title="无密码登录"></a>无密码登录</h2>我们用一台虚拟机代表客户端 ,一台代表服务器.<br>我们要用客户端访问服务器端.</li>
+<li>1.首先在客户端生成ssh公钥和私钥,然后将公钥发送给服务器端.</li>
+<li>2.服务器端需要进行一个操作,就是将发来的这个文件存放到服务器端root目录下.ssh文件下的<code>authorized_keys</code>文件下</li>
+<li>3.然后在客户端连接服务端看是否还需要密码登录.(应该不需要了)</li>
+<li>4.不进行这些操作也是可以访问到服务器的但是每次都需要登录密码.<br>用到的命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa  生成ssh公钥和私钥</span><br><span class="line">scp .ssh/id_rsa.pub root@192.168.56.102:/root/ 将公钥传递到服务器上的root目录</span><br><span class="line">cat id_ras.pub &gt;&gt; .ssh/authorized_keys (这个命令是在服务器上操作的)获取复制过来的公钥内容,采取追加的方式放到autor这个文本下</span><br><span class="line">ssh root@服务器的ip地址 连接服务器</span><br><span class="line">exit 退出服务器 退出服务器</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>注意:当我们虚拟机建好之后,要查看<code>ssh</code>服务是否开启(默认不会开启),打开<code>ssh</code>服务,和Windows下一样我们也可以设置开机自启.下面是命令.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">services sshd status  查看状态</span><br><span class="line">services sshd start   开启ssh服务(这只是一次开启,关机后还是默认关闭的,所以就用到下面的开机自动启动服务)</span><br><span class="line">services sshd stop  停止sshd服务</span><br><span class="line">services sshd restart  重启sshd服务</span><br><span class="line">chkconfig sshd on  开机自动启动</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/ssh/" rel="tag"># ssh</a>
+          
+            <a href="/tags/虚拟机/" rel="tag"># 虚拟机</a>
+          
+            <a href="/tags/Centos/" rel="tag"># Centos</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/20/校园网的模拟设计与实现/" rel="next" title="校园网的模拟设计与实现">
+                <i class="fa fa-chevron-left"></i> 校园网的模拟设计与实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/15/理发租房记/" rel="prev" title="理发租房记">
+                理发租房记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/blog.png"
+                alt="Cheerui"/>
+            
+              <p class="site-author-name" itemprop="name">Cheerui</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/cheerui/cheerui.github.io" title="GitHub &rarr; https://github.com/cheerui/cheerui.github.io" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:cheerui@163.com" title="E-Mail &rarr; mailto:cheerui@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://sighttp.qq.com/msgrd?v=1&uin=1574225054" title="QQ &rarr; http://sighttp.qq.com/msgrd?v=1&uin=1574225054" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+<script type="text/javascript" src="//fold_action.js?v=6.7.0"></script>
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建以Centos为系统的虚拟机"><span class="nav-number">1.</span> <span class="nav-text">创建以Centos为系统的虚拟机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络配置"><span class="nav-number">2.</span> <span class="nav-text">网络配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无密码登录"><span class="nav-number">3.</span> <span class="nav-text">无密码登录</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cheerui</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+<script type="text/javascript" src="https://s5.cnzz.com/z_stat.php?id=1276082497&web_id=1276082497"></script>
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='1' zIndex='-1' count='101' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  <script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  <script>
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item) > -1;
+    });
+    new Valine({
+      el: '#comments' ,
+      verify: false,
+      notify: false,
+      appId: 'YAE8atG45i4IVe1seKJz4v8o-gzGzoHsz',
+      appKey: 'etuyqRI072jtpd5zIs2xapyl',
+      placeholder: '~~Just go go~~',
+      avatar: 'wavatar',
+      meta:guest,
+      pageSize: '10' || 10,
+      visitor: false
+    });
+  </script>
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "YAE8atG45i4IVe1seKJz4v8o-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "YAE8atG45i4IVe1seKJz4v8o-gzGzoHsz",
+                'X-LC-Key': "etuyqRI072jtpd5zIs2xapyl",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <!-- ҳ������С���� -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+<!-- �����鸴�ƹ��� -->
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

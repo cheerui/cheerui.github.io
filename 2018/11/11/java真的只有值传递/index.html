@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="java核心技术卷一中说java程序设计语言中是采用按值调用">
+<meta name="keywords" content="值传递,引用传递">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java真的只有值传递">
+<meta property="og:url" content="http://yoursite.com/2018/11/11/java真的只有值传递/index.html">
+<meta property="og:site_name" content="Cheerui&#39;s blog">
+<meta property="og:description" content="java核心技术卷一中说java程序设计语言中是采用按值调用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/11/11/java真的只有值传递/pika.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/11/11/java真的只有值传递/jieguo1.png">
+<meta property="og:image" content="http://yoursite.com/2018/11/11/java真的只有值传递/jieguo.png">
+<meta property="og:updated_time" content="2019-01-24T12:30:11.926Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java真的只有值传递">
+<meta name="twitter:description" content="java核心技术卷一中说java程序设计语言中是采用按值调用">
+<meta name="twitter:image" content="http://yoursite.com/2018/11/11/java真的只有值传递/pika.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/11/java真的只有值传递/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>java真的只有值传递 | Cheerui's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cheerui's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/11/java真的只有值传递/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cheerui"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/blog.png"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cheerui's blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java真的只有值传递
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建于：2018-11-11 16:34:21" itemprop="dateCreated datePublished" datetime="2018-11-11T16:34:21+08:00">2018-11-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="更新于：2019-01-24 20:30:11" itemprop="dateModified" datetime="2019-01-24T20:30:11+08:00">2019-01-24</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/11/java真的只有值传递/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/11/11/java真的只有值传递/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/11/11/java真的只有值传递/" class="leancloud_visitors" data-flag-title="java真的只有值传递">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/2018/11/11/java真的只有值传递/pika.jpg" alt="皮卡"></p>
+<h4 id="java核心技术卷一中说java程序设计语言中是采用按值调用"><a href="#java核心技术卷一中说java程序设计语言中是采用按值调用" class="headerlink" title="java核心技术卷一中说java程序设计语言中是采用按值调用"></a>java核心技术卷一中说java程序设计语言中是采用按值调用</h4><a id="more"></a> 
+<h3 id="值传递和引用传递"><a href="#值传递和引用传递" class="headerlink" title="值传递和引用传递"></a>值传递和引用传递</h3><blockquote>
+<p><strong>值传递</strong>（pass by value）是指在调用函数时将实际参数复制一份传递到函数中，这样在函数中如果对参数进行修改，将不会影响到实际参数。 </p>
+</blockquote>
+<blockquote>
+<p><strong>引用传递</strong>（pass by reference）是指在调用函数时将实际参数的地址直接传递到函数中，那么在函数中对参数所进行的修改，将影响到实际参数,形参和实参总是指向同一个地址,形参指向哪里实参就会指向哪里.</p>
+</blockquote>
+<h3 id="java中的基本数据类型和引用数据类型"><a href="#java中的基本数据类型和引用数据类型" class="headerlink" title="java中的基本数据类型和引用数据类型"></a>java中的基本数据类型和引用数据类型</h3><p><strong>java中的基本数据类型:</strong></p>
+<blockquote>
+<ul>
+<li>4种整数类型：byte、short、int、long</li>
+<li>2种浮点数类型：float、double</li>
+<li>1种字符类型：char</li>
+<li>1种布尔类型：boolean<br><strong>java中的引用数据类型:</strong></li>
+<li>类</li>
+<li>接口</li>
+<li>数组</li>
+</ul>
+</blockquote>
+<h4 id="下面就对java中传递参数是值传递还是引用传递展开讨论"><a href="#下面就对java中传递参数是值传递还是引用传递展开讨论" class="headerlink" title="下面就对java中传递参数是值传递还是引用传递展开讨论"></a>下面就对java中传递参数是值传递还是引用传递展开讨论</h4><h5 id="下面先来看基本数据类型"><a href="#下面先来看基本数据类型" class="headerlink" title="下面先来看基本数据类型"></a>下面先来看基本数据类型</h5><pre><code class="java">
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>{
+    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testInt</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>
+<span class="function">    </span>{
+         a=<span class="number">10</span>;
+         b=<span class="number">20</span>;
+        System.out.println(<span class="string">"交换后 "</span>+<span class="string">"a:"</span>+a+<span class="string">", b:"</span>+b);
+    }    
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>
+<span class="function">    </span>{
+        <span class="keyword">int</span> a=<span class="number">1</span>;
+        <span class="keyword">int</span> b=<span class="number">2</span>;
+        System.out.println(<span class="string">"交换前 "</span>+<span class="string">"a:"</span>+a+<span class="string">", b:"</span>+b);
+        testInt(a,b);
+        System.out.println(<span class="string">"方法结束后"</span>+<span class="string">"a:"</span>+a+<span class="string">", b:"</span>+b);
+    } 
+ }
+</code></pre>
+<blockquote>
+<p>运行结果是这样的</p>
+</blockquote>
+<p><img src="/2018/11/11/java真的只有值传递/jieguo1.png" alt="结果"><br>下面的头文字Ｄ的例子中:<strong>拓海</strong> <code>在栈中的实参名字</code>,<strong>阿树</strong> <code>在栈中的形参名字</code> ,<strong>钥匙</strong> <code>指向堆中实例的地址</code>,<strong>赛车</strong> <code>堆中的实例</code>,<strong>比赛</strong> <code>程序中的方法(update,testInt)</code></p>
+<blockquote>
+<p>java中基本数据类型在传递的时候,用的是值传递,就是拷贝和实参一模一样的值然后由形参进行操作,当方法结束后,形参的生命周期就会终止,实参的值并没有受到影响.</p>
+<ul>
+<li>这里举个头文字D的例子,拓海有一辆AE86,过两天阿树有一场比赛,阿树想借拓海的这辆AE86,在比赛开始前拓海复制了一个一模一样的AE86给阿树,阿树又对这辆复制出来的AE86进行了改装,比赛结束后,阿树感觉比赛失利了,就开着车永久消失了.改装并没有影响到原来的AE86,这就是值传递,形参不会改变实参的值. </li>
+</ul>
+</blockquote>
+<h4 id="下面来看引用数据类型"><a href="#下面来看引用数据类型" class="headerlink" title="下面来看引用数据类型"></a>下面来看引用数据类型</h4><pre><code class="java">
+<span class="comment">//  类的编写</span>
+  <span class="class"><span class="keyword">class</span> <span class="title">Car</span></span>
+<span class="class">  </span>{
+  <span class="keyword">public</span> String name;
+       <span class="function"><span class="keyword">public</span> <span class="title">Car</span><span class="params">()</span></span>
+<span class="function">       </span>{}
+       <span class="function"><span class="keyword">public</span> <span class="title">Car</span><span class="params">(String name)</span></span>
+<span class="function">       </span>{
+       <span class="keyword">this</span>.name=name;
+       }
+  }
+
+</code></pre>
+<pre><code>下面进行测试
+</code></pre><pre><code class="java">
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>
+<span class="class"></span>{
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">update1</span><span class="params">(Car car)</span></span>
+<span class="function">    </span>{
+      car.name=<span class="string">"GTR"</span>;
+      System.out.println(<span class="string">"修改后的名字是:"</span>+car.name);
+    }
+    <span class="comment">//这个方法比上面的方法多了一条a=new Car()语句</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">update2</span><span class="params">(Car car)</span></span>
+<span class="function">    </span>{
+    car=<span class="keyword">new</span> Car();
+    car.name=<span class="string">"GTR"</span>;
+    System.out.println(<span class="string">"修改后的名字是:"</span>+car.name);
+    }
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>
+<span class="function">    </span>{
+        Car a=<span class="keyword">new</span> Car(<span class="string">"AE86"</span>);
+        Car b=<span class="keyword">new</span> Car(<span class="string">"AE86"</span>);
+        System.out.println(<span class="string">"调用update1前a的名字是:"</span>+a.name);
+        update1(a);
+        System.out.println(<span class="string">"调用update1后a的名字是:"</span>+a.name);
+        System.out.println(<span class="string">"调用update2前b的名字是:"</span>+b.name);
+        update2(b);
+        System.out.println(<span class="string">"调用update2后b的名字是:"</span>+b.name);
+
+    }
+}
+</code></pre>
+<blockquote>
+<p>运行结果是这样的</p>
+</blockquote>
+<p><img src="/2018/11/11/java真的只有值传递/jieguo.png" alt="结果"></p>
+<blockquote>
+<p>看完上面的update1方法,觉得引用数据类型和基本数据类型不一样,引用数据类型传入方法后,方法调用结束后对象的属性发生了变化,认为这是引用传递,将对象a的地址送到了形参中,然后对形参改变实参就会改变.  </p>
+</blockquote>
+<blockquote>
+<p>但是update2马上就推翻了这个想法,将实参送入形参后,形参马上在堆中新建了一个对象,如果是引用传递,那么此时形参和实参都是指向这个对象的,然后程序又对形参的name属性进行了修改,那么此时实参也会被修改,看到的结果就应该和update1一样.但是结果却不是这样的,并没有修改数据,这就说明了将对象作为实参传入方法的形参,并不是引用传递.     </p>
+</blockquote>
+<h5 id="那么java中引用类型数据到底是怎么回事那-下面把自己的查阅资料理解的写下来-作为后续回顾"><a href="#那么java中引用类型数据到底是怎么回事那-下面把自己的查阅资料理解的写下来-作为后续回顾" class="headerlink" title="那么java中引用类型数据到底是怎么回事那,下面把自己的查阅资料理解的写下来.作为后续回顾."></a>那么java中引用类型数据到底是怎么回事那,下面把自己的查阅资料理解的写下来.作为后续回顾.</h5><blockquote>
+<p>Car b = new Car(“AE86”);<br>执行这个语句首先会在栈中创建一个b变量,然后在堆中创建一个Car类的实例,然后b指向堆中的实例.<br>其实在java程序中,将对象传入形参中,也是值传递,基本数据类型值传递就是拷贝一个变量的副本;下面以update2()分析,引用数据类型就是将变量名(b)指向堆的地址复制一份,也就是说在栈中有一个变量名(car)也指向堆中b的实例.<br>现在执行  car =new car();就是形参car指向了堆中一个新的地址,而b还是指向原来的地址的,这样的话,car随便修改name属性,是影响不到b的.最后方法结束car被释放,堆中的新对象被GC回收.     </p>
+</blockquote>
+<p>在update1()中可以修改是因为形参和实参指向同一块内容,当形参修改name属性,那么堆中的对象就会被修改,update1()执行结束后,car释放,但堆中的实例还有变量指向,不会被回收,这时就修改了b的值.</p>
+<h4 id="还是用头文字D的例子来说明"><a href="#还是用头文字D的例子来说明" class="headerlink" title="还是用头文字D的例子来说明"></a>还是用头文字D的例子来说明</h4><h4 id="引用传递"><a href="#引用传递" class="headerlink" title="引用传递:"></a>引用传递:</h4><blockquote>
+<ul>
+<li>还是有比赛,比赛(方法)前,拓海(栈中存的变量名,实参)将AE86(堆中类的实例)钥匙(地址)交给了阿树(形参),比赛途中阿树对AE86进行了改装,比赛后阿树消失了,但是钥匙给了拓海,那么此时的车是经过改装的.</li>
+<li>Car=new Car();在例子中的体现</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>比赛中,阿树感觉AE86不好开,旁边有一辆GTR,然后阿树用手上的这把钥匙捅开了GTR(new Car();),就开着GTR完成了比赛,AE86在路上找不到了(因为此时没有变量指向这辆AE86,会被GC回收),然后比赛完成后,阿树消失了,但钥匙给了拓海,此时的车是GTR. </li>
+</ul>
+</blockquote>
+<h4 id="java中引用数据的传输"><a href="#java中引用数据的传输" class="headerlink" title="java中引用数据的传输"></a>java中引用数据的传输</h4><blockquote>
+<ul>
+<li>赛前,拓海将钥匙配了一个交给了阿树,阿树在比赛中对车进行了改装,比赛完之后阿树和钥匙一起消失了,那么拓海用钥匙开车,车是经过改装过的.</li>
+<li>Car=new Car();在例子中的体现</li>
+<li>比赛中,阿树感觉AE86不好开,旁边有一辆GTR,然后阿树用配的的这把钥匙捅开了GTR(new Car();),这时候AE86是不会找不到的(因为此时拓海的钥匙还是指向这辆车的),阿树开着GTR完成了比赛,比赛后阿树和钥匙消失了,GTR也会消失(没有钥匙指向这辆车),此时的车还是AE86.</li>
+</ul>
+</blockquote>
+<p><strong>这两个是不同的:</strong>引用传递是真的将地址交给了形参,形参和实参始终指向堆中的一个类的实例;而java中引用类型的传递,则是将实参的地址复制一份交给了形参,这就符合值传递的概念,复制一个副本,只不过这里复制的是一个地址罢了.        </p>
+<p><strong>参考链接:</strong><br>[Java团长公众号]: <a href="https://mp.weixin.qq.com/s/4efxpvxOAzg1E4eLIsRLiw" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/4efxpvxOAzg1E4eLIsRLiw</a><br>[Hollis]: <a href="https://juejin.im/entry/5ac187ad6fb9a028e52dfaee" target="_blank" rel="noopener">https://juejin.im/entry/5ac187ad6fb9a028e52dfaee</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/值传递/" rel="tag"># 值传递</a>
+          
+            <a href="/tags/引用传递/" rel="tag"># 引用传递</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/04/并发和并行/" rel="next" title="并发和并行进程与线程">
+                <i class="fa fa-chevron-left"></i> 并发和并行进程与线程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/14/java单链表/" rel="prev" title="java实现单链表">
+                java实现单链表 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/blog.png"
+                alt="Cheerui"/>
+            
+              <p class="site-author-name" itemprop="name">Cheerui</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/cheerui/cheerui.github.io" title="GitHub &rarr; https://github.com/cheerui/cheerui.github.io" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:cheerui@163.com" title="E-Mail &rarr; mailto:cheerui@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://sighttp.qq.com/msgrd?v=1&uin=1574225054" title="QQ &rarr; http://sighttp.qq.com/msgrd?v=1&uin=1574225054" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+<script type="text/javascript" src="//fold_action.js?v=6.7.0"></script>
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#java核心技术卷一中说java程序设计语言中是采用按值调用"><span class="nav-number">1.</span> <span class="nav-text">java核心技术卷一中说java程序设计语言中是采用按值调用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#值传递和引用传递"><span class="nav-number"></span> <span class="nav-text">值传递和引用传递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java中的基本数据类型和引用数据类型"><span class="nav-number"></span> <span class="nav-text">java中的基本数据类型和引用数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下面就对java中传递参数是值传递还是引用传递展开讨论"><span class="nav-number">1.</span> <span class="nav-text">下面就对java中传递参数是值传递还是引用传递展开讨论</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#下面先来看基本数据类型"><span class="nav-number">1.1.</span> <span class="nav-text">下面先来看基本数据类型</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下面来看引用数据类型"><span class="nav-number">2.</span> <span class="nav-text">下面来看引用数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#那么java中引用类型数据到底是怎么回事那-下面把自己的查阅资料理解的写下来-作为后续回顾"><span class="nav-number">2.1.</span> <span class="nav-text">那么java中引用类型数据到底是怎么回事那,下面把自己的查阅资料理解的写下来.作为后续回顾.</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#还是用头文字D的例子来说明"><span class="nav-number">3.</span> <span class="nav-text">还是用头文字D的例子来说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引用传递"><span class="nav-number">4.</span> <span class="nav-text">引用传递:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#java中引用数据的传输"><span class="nav-number">5.</span> <span class="nav-text">java中引用数据的传输</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cheerui</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+<script type="text/javascript" src="https://s5.cnzz.com/z_stat.php?id=1276082497&web_id=1276082497"></script>
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='1' zIndex='-1' count='101' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  <script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  <script>
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item) > -1;
+    });
+    new Valine({
+      el: '#comments' ,
+      verify: false,
+      notify: false,
+      appId: 'YAE8atG45i4IVe1seKJz4v8o-gzGzoHsz',
+      appKey: 'etuyqRI072jtpd5zIs2xapyl',
+      placeholder: '~~Just go go~~',
+      avatar: 'wavatar',
+      meta:guest,
+      pageSize: '10' || 10,
+      visitor: false
+    });
+  </script>
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "YAE8atG45i4IVe1seKJz4v8o-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "YAE8atG45i4IVe1seKJz4v8o-gzGzoHsz",
+                'X-LC-Key': "etuyqRI072jtpd5zIs2xapyl",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <!-- ҳ������С���� -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+<!-- �����鸴�ƹ��� -->
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

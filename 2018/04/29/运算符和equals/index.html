@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="keywords" content="java,自增,自减,==,equals,String">
+<meta property="og:type" content="article">
+<meta property="og:title" content="运算符和equals">
+<meta property="og:url" content="http://yoursite.com/2018/04/29/运算符和equals/index.html">
+<meta property="og:site_name" content="Cheerui&#39;s blog">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/04/29/运算符和equals/gangkou2.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/29/运算符和equals/i++.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/29/运算符和equals/equals.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/29/运算符和equals/Objequals.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/29/运算符和equals/Strequals.png">
+<meta property="og:updated_time" content="2019-01-23T14:51:09.711Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="运算符和equals">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/29/运算符和equals/gangkou2.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/29/运算符和equals/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>运算符和equals | Cheerui's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cheerui's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/29/运算符和equals/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cheerui"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/blog.png"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cheerui's blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">运算符和equals
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建于：2018-04-29 14:24:47" itemprop="dateCreated datePublished" datetime="2018-04-29T14:24:47+08:00">2018-04-29</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="更新于：2019-01-23 22:51:09" itemprop="dateModified" datetime="2019-01-23T22:51:09+08:00">2019-01-23</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/29/运算符和equals/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/29/运算符和equals/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/04/29/运算符和equals/" class="leancloud_visitors" data-flag-title="运算符和equals">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/2018/04/29/运算符和equals/gangkou2.jpg" alt="港口"><br><a id="more"></a></p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><blockquote>
+<ul>
+<li>1.自增自减(++i,i++,- -i,i- - )</li>
+<li>2.==和equals</li>
+</ul>
+</blockquote>
+<h2 id="1-自增自减运算符"><a href="#1-自增自减运算符" class="headerlink" title="1.自增自减运算符"></a>1.自增自减运算符</h2><blockquote>
+<ul>
+<li><strong>++i(- -i)</strong>先加减后运算</li>
+<li><strong>i++(i- -)</strong>先运算后加减</li>
+<li>这里拿加来举例(减亦是这样):区分<strong>i++</strong>,<strong>++i</strong>,<strong>i</strong>,三者<strong>区别</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">int i = 3;</span><br><span class="line">int j = 4;</span><br><span class="line">int c = i++ + ++j + i +j + --j;</span><br><span class="line">System.out.println(c);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>看到这种问题先不要着急算,先将他们的每一块的值算出来,然后根据他们运算符的优先级进行运算.<br><img src="/2018/04/29/运算符和equals/i++.png" alt="自增">    </li>
+<li>i++整体是3 此时<strong>i=4, ++j整体是5,此时j=5,</strong>这就是上面提到的两种先加减后运算 ,和先运算后加减.</li>
+<li>把上面的过程说一下, <strong>i++后i++=3,i=4</strong>, 然后<strong>++j,++j</strong>等于5,j=5, 然后 +4,+5, 然后<strong>- -j,- -j等于4.</strong></li>
+<li><strong>c = 3 + 5 + 4 + 5 + 4 = 21</strong></li>
+</ul>
+</blockquote>
+<h2 id="2-和equals的区别和用法"><a href="#2-和equals的区别和用法" class="headerlink" title="2.==和equals的区别和用法"></a>2.==和equals的区别和用法</h2><p>先看下面的代码说出他的运算结果</p>
+<pre><code class="java"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>
+<span class="class">    </span>{
+    <span class="comment">//定义的属性</span>
+        String name;
+        <span class="keyword">int</span> age;
+        <span class="comment">//空构造方法</span>
+        <span class="function"><span class="keyword">public</span> <span class="title">A</span><span class="params">()</span></span>{}
+        <span class="comment">//带参数的构造方法</span>
+        <span class="function"><span class="keyword">public</span> <span class="title">A</span><span class="params">(String name, <span class="keyword">int</span> age)</span></span>
+<span class="function">        </span>{
+            <span class="keyword">this</span>.name = name;
+            <span class="keyword">this</span>.age = age;
+        }
+         <span class="comment">//程序运行入口</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>
+<span class="function">        </span>{
+        A a = <span class="keyword">new</span> A(<span class="string">"cheerui"</span>,<span class="number">19</span>);
+        A b = <span class="keyword">new</span> A(<span class="string">"cheerui"</span>,<span class="number">19</span>);
+        A c = <span class="keyword">new</span> A(<span class="string">"qwer"</span>,<span class="number">18</span>);
+        A d = <span class="keyword">new</span> A(<span class="keyword">new</span> String(<span class="string">"xiao"</span>),<span class="number">19</span>);
+        A e = <span class="keyword">new</span> A(<span class="keyword">new</span> String(<span class="string">"xiao"</span>),<span class="number">70</span> );
+        <span class="comment">//判断a和b的年龄                             1</span>
+        System.out.println(<span class="string">"a和b的年龄用==比较的结果是    "</span>+(a.age == b.age));         <span class="comment">//true               </span>
+        <span class="comment">//判断a和c的年龄                             2                      </span>
+        System.out.println(<span class="string">"a和c的年龄用==比较的结果是    "</span>+(a.age == c.age));         <span class="comment">//false                  </span>
+        <span class="comment">//对象a和对象b作比较,这个用的是equals        3</span>
+        System.out.println(<span class="string">"a和b用equals比较的结果是      "</span>+(a.equals(b)));            <span class="comment">//false                  </span>
+        <span class="comment">//同样是对象a和b作比较 这个用的是==          4</span>
+        System.out.println(<span class="string">"a和b用==比较的结果是          "</span>+(a == b));                   <span class="comment">//false                </span>
+        <span class="comment">//对象a的名字和对象b的名字作比较             5</span>
+        System.out.println(<span class="string">"a和b的名字用equals比较的结果是"</span>+(a.name.equals(b.name)));   <span class="comment">//true                 </span>
+        <span class="comment">//用==判断a和b的名字                         6</span>
+        System.out.println(<span class="string">"a和b的名字用==比较的结果是    "</span>+(a.name == b.name));         <span class="comment">//true                      </span>
+        <span class="comment">//用==判断d和e的名字                         7</span>
+        System.out.println(<span class="string">"d和e的名字用==比较的结果是    "</span>+(d.name == e.name));         <span class="comment">//false                   </span>
+        <span class="comment">//用equals判断d和e的名字                     8</span>
+        System.out.println(<span class="string">"d和e的名字用equals比较的结果是"</span>+(d.name.equals(e.name)));    <span class="comment">//true                        </span>
+        }
+</code></pre>
+<p><strong>输出结果是:</strong><br><img src="/2018/04/29/运算符和equals/equals.png" alt="equals"></p>
+<blockquote>
+<ul>
+<li><h2 id="下面我们就对这个结果理性分析一波"><a href="#下面我们就对这个结果理性分析一波" class="headerlink" title="下面我们就对这个结果理性分析一波"></a>下面我们就对这个结果理性分析一波</h2></li>
+<li>我之前听过equals方法是比较内容的,但是根据输出来看,好像也不是.    </li>
+<li>下面来一条一条分析</li>
+<li><strong>语句1&amp;2</strong> a和b是两个对象,用==判断他们的年龄,得到true ==判断的是变量中所存的东西,<strong>基本数据类型就判断他们具体的数值,引用类型就判断他们的地址</strong>. <strong>a.age</strong>和<strong>b.age</strong>中存的是int类型的变量,那么==比较的就是他们的数值,这就是 语句1和语句2输出不一样的原因.</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>语句3</strong>   a和b是两个对象,用equals去比较他们,<strong>他们没有重写equals方法</strong>,所以他们的<strong>equals</strong>方法是<strong>Object</strong>的,<strong>Object的equals方法(见下图)</strong>也是用<strong>==</strong>来比较两个对象的,因为比较的是对象,是引用类型,所以比较的是地址,a和b是两个对象所以他们的地址不一样,结果就是<strong>false</strong></li>
+<li><img src="/2018/04/29/运算符和equals/Objequals.png" alt="Objequals"></li>
+<li>这里也用到了<strong>多态</strong>, 他传入的是一个Object类型的参数,就是因为所有类都继承自<strong>Object</strong>类,<strong>父类引用指向子类</strong>在这里体现的淋漓尽致.</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>语句4</strong>   用==来比较a和b两个对象,就是在比较他们的地址,他们是两个对象,所以地址不一样,不管它里面存的东西是否一样,都是<strong>false.</strong></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>语句5</strong>   用<strong>equals</strong>比较两个对象a和b的名字,为什么结果就是<strong>true</strong>了那,因为这里的<strong>equals方法不是Object的了,</strong>现在他是<strong>String类的equals方法(见下图),String类将父类中的equals方法重写</strong>,这时比较的就是他们的内容了.</li>
+<li><img src="/2018/04/29/运算符和equals/Strequals.png" alt="Strequals"></li>
+<li>这里也有<strong>多态</strong></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>语句6</strong>   用==比较两个对象a和b的名字,首先判断比较的是什么类型的,发现<strong>name是String类型</strong>(String是一个类)的,那么比较的就是他们的地址,a和b是两个对象,那么他们中的引用类型的变量应该地址也是不一样的,结果应该为<strong>false.</strong>但是结果差强人意,下面会讲为什么是<strong>true.</strong></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>语句7</strong>   同样用==比较两个对象d和e的名字,这次就和我们想的是一样的.(下面会说道,提前透露一下,这和<strong>String类型的变量初始化</strong>有关系).</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>语句8</strong>   用equals判断两个对象d和e的名字,这里就和5的原理是一样的,这里就不在赘述了.</li>
+</ul>
+</blockquote>
+<h2 id="String类型的两种初始化方式"><a href="#String类型的两种初始化方式" class="headerlink" title="String类型的两种初始化方式"></a>String类型的两种初始化方式</h2><blockquote>
+<ul>
+<li>String s = new String(“cheerui”);</li>
+<li>String s1 = “cheerui”;</li>
+</ul>
+</blockquote>
+<h3 id="String-s-new-String-“cheerrui”"><a href="#String-s-new-String-“cheerrui”" class="headerlink" title="String s = new String(“cheerrui”)"></a>String s = new String(“cheerrui”)</h3><blockquote>
+<ul>
+<li>这种通过<strong>new的初始化方式</strong>,就是和我们想的一样,会在<strong>堆中开辟一块空间,new两次就是开辟两块空间,所以7输出了false</strong>.</li>
+</ul>
+</blockquote>
+<h3 id="String-s-“cheerui”"><a href="#String-s-“cheerui”" class="headerlink" title="String s = “cheerui”"></a>String s = “cheerui”</h3><blockquote>
+<ul>
+<li>这种方式也是来初始化的,但是这种方式不会在堆中开辟空间,而是在<strong>静态区开辟空间</strong>,如果下一次在利用这种方式初始化的话,那么<strong>jvm</strong>首先会到<strong>静态区</strong>中看看有没有这个字符串,如果有就不会再次创建,而是直接把地址指向这个变量,这就是6中为什么是<strong>true</strong>的原因.</li>
+</ul>
+</blockquote>
+<h3 id="关于jvm的一些知识后面的更新会有"><a href="#关于jvm的一些知识后面的更新会有" class="headerlink" title="关于jvm的一些知识后面的更新会有"></a>关于jvm的一些知识后面的更新会有</h3><h2 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h2><blockquote>
+<ul>
+<li><strong>==比较的是变量中存储的东西,基本数据类型就判断他们具体的数值,引用类型就判断他们的地址.</strong></li>
+<li><strong>引用类型之间的比较用equals来比较,String类型的equals方法jdk已经给重写,其他引用类型的就需要自己重写,如果不重写,就会调用Object的equals方法,你自己的类继承自Object方法,所以拥有Object的equals方法.</strong></li>
+</ul>
+</blockquote>
+<h4 id="ps-这些是自己通过学习java的一些看法-如果感觉那里不对的话-可以点击头像下方的邮件或者qq图标-联系我更正"><a href="#ps-这些是自己通过学习java的一些看法-如果感觉那里不对的话-可以点击头像下方的邮件或者qq图标-联系我更正" class="headerlink" title="ps:这些是自己通过学习java的一些看法,如果感觉那里不对的话,可以点击头像下方的邮件或者qq图标,联系我更正."></a>ps:这些是自己通过学习java的一些看法,如果感觉那里不对的话,可以点击头像下方的邮件或者qq图标,联系我更正.</h4>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/自增/" rel="tag"># 自增</a>
+          
+            <a href="/tags/自减/" rel="tag"># 自减</a>
+          
+            <a href="/tags/" rel="tag"># ==</a>
+          
+            <a href="/tags/equals/" rel="tag"># equals</a>
+          
+            <a href="/tags/String/" rel="tag"># String</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/28/重载重写/" rel="next" title="重载和重写的区别">
+                <i class="fa fa-chevron-left"></i> 重载和重写的区别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/30/二维数组/" rel="prev" title="二维数组的遍历">
+                二维数组的遍历 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/blog.png"
+                alt="Cheerui"/>
+            
+              <p class="site-author-name" itemprop="name">Cheerui</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/cheerui/cheerui.github.io" title="GitHub &rarr; https://github.com/cheerui/cheerui.github.io" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:cheerui@163.com" title="E-Mail &rarr; mailto:cheerui@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://sighttp.qq.com/msgrd?v=1&uin=1574225054" title="QQ &rarr; http://sighttp.qq.com/msgrd?v=1&uin=1574225054" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+<script type="text/javascript" src="//fold_action.js?v=6.7.0"></script>
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-自增自减运算符"><span class="nav-number">2.</span> <span class="nav-text">1.自增自减运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-和equals的区别和用法"><span class="nav-number">3.</span> <span class="nav-text">2.==和equals的区别和用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下面我们就对这个结果理性分析一波"><span class="nav-number">4.</span> <span class="nav-text">下面我们就对这个结果理性分析一波</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String类型的两种初始化方式"><span class="nav-number">5.</span> <span class="nav-text">String类型的两种初始化方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String-s-new-String-“cheerrui”"><span class="nav-number">5.1.</span> <span class="nav-text">String s = new String(“cheerrui”)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String-s-“cheerui”"><span class="nav-number">5.2.</span> <span class="nav-text">String s = “cheerui”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于jvm的一些知识后面的更新会有"><span class="nav-number">5.3.</span> <span class="nav-text">关于jvm的一些知识后面的更新会有</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ps-这些是自己通过学习java的一些看法-如果感觉那里不对的话-可以点击头像下方的邮件或者qq图标-联系我更正"><span class="nav-number">6.0.1.</span> <span class="nav-text">ps:这些是自己通过学习java的一些看法,如果感觉那里不对的话,可以点击头像下方的邮件或者qq图标,联系我更正.</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cheerui</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+<script type="text/javascript" src="https://s5.cnzz.com/z_stat.php?id=1276082497&web_id=1276082497"></script>
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='1' zIndex='-1' count='101' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  <script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  <script>
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item) > -1;
+    });
+    new Valine({
+      el: '#comments' ,
+      verify: false,
+      notify: false,
+      appId: 'YAE8atG45i4IVe1seKJz4v8o-gzGzoHsz',
+      appKey: 'etuyqRI072jtpd5zIs2xapyl',
+      placeholder: '~~Just go go~~',
+      avatar: 'wavatar',
+      meta:guest,
+      pageSize: '10' || 10,
+      visitor: false
+    });
+  </script>
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "YAE8atG45i4IVe1seKJz4v8o-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "YAE8atG45i4IVe1seKJz4v8o-gzGzoHsz",
+                'X-LC-Key': "etuyqRI072jtpd5zIs2xapyl",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <!-- ҳ������С���� -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+<!-- �����鸴�ƹ��� -->
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
