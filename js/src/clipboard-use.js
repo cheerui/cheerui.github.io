@@ -1,4 +1,4 @@
-/*ҳ���������ɺ󣬴������ư�ť*/
+/*ҳ��������ɺ󣬴������ư�ť*/
 !function (e, t, a) { 
   /* code */
   var initCopyCode = function(){

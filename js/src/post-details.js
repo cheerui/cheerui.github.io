@@ -107,6 +107,6 @@ $(document).ready(function(){
         $('>.fold', this.parentNode).slideToggle();
         $('>:first', this).toggleClass('open');
     });
-    //Ĭ���������۵�
+    //Ĭ��������۵�
     $("div.fold").css("display","none");
 });
