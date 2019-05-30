@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://cheerui.cn/2019/05/28/解压版Mysql安装配置方法/path.png">
 <meta property="og:image" content="http://cheerui.cn/2019/05/28/解压版Mysql安装配置方法/yanZheng.png">
 <meta property="og:image" content="http://cheerui.cn/2019/05/28/解压版Mysql安装配置方法/lianJie.png">
-<meta property="og:updated_time" content="2019-05-29T11:15:34.624Z">
+<meta property="og:updated_time" content="2019-05-30T06:08:59.735Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql解压版安装配置方法(windows下)">
 <meta name="twitter:description" content="声明这个MySQL的版本是8.0.15,别的版本没有测试过,所以不敢确定">
@@ -405,7 +405,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="更新于：2019-05-29 19:15:34" itemprop="dateModified" datetime="2019-05-29T19:15:34+08:00">2019-05-29</time>
+                <time title="更新于：2019-05-30 14:08:59" itemprop="dateModified" datetime="2019-05-30T14:08:59+08:00">2019-05-30</time>
               
             
           </span>
@@ -506,7 +506,7 @@
 <h2 id="3安装MySQL服务并启动mysql"><a href="#3安装MySQL服务并启动mysql" class="headerlink" title="3安装MySQL服务并启动mysql"></a>3安装MySQL服务并启动mysql</h2><p>下面就是说,这样安装完成之后怎么用</p>
 <h3 id="3-1首先安装mysql服务"><a href="#3-1首先安装mysql服务" class="headerlink" title="3.1首先安装mysql服务"></a>3.1首先安装mysql服务</h3><p>打开安装mysql的路径,并且找到bin目录,在此文件夹下进入cmd,然后输入<strong>mysqld.exe -install</strong>来安装mysql服务稍等片刻就会出现<br>    <strong>Service successfully installed</strong>的提示,这就说明服务安装成功,如果显示未安装成功,一般情况下是因为电脑使用用户的权限不够.</p>
 <h3 id="3-2对数据库进行初始化"><a href="#3-2对数据库进行初始化" class="headerlink" title="3.2对数据库进行初始化"></a>3.2对数据库进行初始化</h3><p>然后接着输入<strong>mysqld - -initialize - -console</strong>命令(这个命令是都是横线并且双横线之间没有空格),对数据库进行初始化(要等一小会),之后会出现几行字母,要记住 <strong>password is generated for root@localhost:</strong>后<br>面的东西,这是root用户的初始密码.</p>
-<h3 id="3-3启动数据库"><a href="#3-3启动数据库" class="headerlink" title="3.3启动数据库"></a>3.3启动数据库</h3><p>使用<strong>net start mysql</strong>来启动数据库,同样也可以通过<strong>net stop mysql</strong>来关闭数据库.在开启数据库后,数据库每次开机是会默认自启动的,<br>可以把他调成手动启动通过在运行栏中(win+R)输入<strong>service.msc</strong>,在服务中找到mysql对它进行设置<br><img src="/2019/05/28/解压版Mysql安装配置方法/lianJie.png" alt="连接"></p>
+<h3 id="3-3启动数据库"><a href="#3-3启动数据库" class="headerlink" title="3.3启动数据库"></a>3.3启动数据库</h3><p>使用<strong>net start mysql</strong>来启动数据库,同样也可以通过<strong>net stop mysql</strong>来关闭数据库.在开启数据库后,数据库每次开机是会默认自启动的,<br>可以把他调成手动启动通过在运行栏中(win+R)输入<strong>services.msc</strong>,在服务中找到mysql对它进行设置<br><img src="/2019/05/28/解压版Mysql安装配置方法/lianJie.png" alt="连接"></p>
 <h2 id="4进入MySQL并修改MySQL的初始密码"><a href="#4进入MySQL并修改MySQL的初始密码" class="headerlink" title="4进入MySQL并修改MySQL的初始密码"></a>4进入MySQL并修改MySQL的初始密码</h2><h3 id="4-1-进入mysql"><a href="#4-1-进入mysql" class="headerlink" title="4.1 进入mysql"></a>4.1 进入mysql</h3><p>通过<code>mysql -uroot -p</code>命令进入数据库,当你输入完成前面的命令的时候,会让你键入密码,这时候把3.2中记录的那段字符输进去,就成功进入数据库了.</p>
 <h3 id="4-2-修改mysql密码"><a href="#4-2-修改mysql密码" class="headerlink" title="4.2 修改mysql密码"></a>4.2 修改mysql密码</h3><p>通过alter语句来修改<strong>ALTER user ‘root‘@’localhost’ IDENTIFIED BY ‘your password’</strong>(注意符号的中英文),然后在mysql&gt;的状态下,输入<strong>exit</strong>会退出MySQL的环境,<br>然后通过<strong>mysql -uroot -p</strong>命令,让后键入你的新密码,就可以进入数据库了.</p>
 <h2 id="5通过commandLine和navicat来操纵数据库"><a href="#5通过commandLine和navicat来操纵数据库" class="headerlink" title="5通过commandLine和navicat来操纵数据库"></a>5通过commandLine和navicat来操纵数据库</h2><p>完成4步骤后就可以用sql语句来操作了,如果想用可视化界面,在上面mysql链接里有navicat的包,安装号后创建新的链接,然后输入你数据库的信息,就可以连接了.<br>用navicat连接mysql的时候可能会出现<strong>1251</strong>这种错误<br>在命令行中依次输入如下<strong>命令</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">USE mysql；</span><br><span class="line"></span><br><span class="line">ALTER USER <span class="string">'root'</span>@<span class="string">'localhost'</span> IDENTIFIED WITH mysql_native_password BY <span class="string">'你的密码'</span>;   <span class="comment">//(注意符号中英文)</span></span><br><span class="line"></span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure></p>
@@ -666,7 +666,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -697,7 +697,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -790,7 +794,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">40</span>
+                      
+                    
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
