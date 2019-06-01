@@ -112,7 +112,7 @@
 <meta property="og:image" content="http://cheerui.cn/2019/05/30/实习通讯录遇到的问题/zhucequdong.png">
 <meta property="og:image" content="http://cheerui.cn/2019/05/30/实习通讯录遇到的问题/jieMian.png">
 <meta property="og:image" content="http://cheerui.cn/2019/05/30/实习通讯录遇到的问题/shaoxieg.png">
-<meta property="og:updated_time" content="2019-05-30T06:08:42.238Z">
+<meta property="og:updated_time" content="2019-06-01T12:14:23.333Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实习通讯录遇到的问题">
 <meta name="twitter:description" content="声明本教程是建立在pc机上已经装好IDE mysql数据库以及Tomcat服务器的情况下">
@@ -392,12 +392,24 @@
                 
               
 
-              <time title="创建于：2019-05-30 11:02:04 / 更新于：14:08:42" itemprop="dateCreated datePublished" datetime="2019-05-30T11:02:04+08:00">2019-05-30</time>
+              <time title="创建于：2019-05-30 11:02:04" itemprop="dateCreated datePublished" datetime="2019-05-30T11:02:04+08:00">2019-05-30</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="更新于：2019-06-01 20:14:23" itemprop="dateModified" datetime="2019-06-01T20:14:23+08:00">2019-06-01</time>
               
             
           </span>
@@ -490,6 +502,7 @@
 <p> 到这里启动服务器，访问<strong><a href="http://localhost:8080/day01/ListContactServlet" target="_blank" rel="noopener">http://localhost:8080/day01/ListContactServlet</a></strong> 就可以出现下面的界面了（但是还有bug，下面4和5修改了部分bug）<br>  <img src="/2019/05/30/实习通讯录遇到的问题/jieMian.png" alt="path"></p>
 <h3 id="2-4缺少斜杠"><a href="#2-4缺少斜杠" class="headerlink" title="2.4缺少斜杠"></a>2.4缺少斜杠</h3><p>在所有的servlet中出现形如这样的界面在双引号后面 ListContactServlet前面加上”/“.<br><img src="/2019/05/30/实习通讯录遇到的问题/shaoxieg.png" alt="path"></p>
 <h3 id="2-5jsp修改"><a href="#2-5jsp修改" class="headerlink" title="2.5jsp修改"></a>2.5jsp修改</h3><p>在updateContact.jsp下 将29行的value后面的<strong>${contact.id }</strong>，改为<strong>${contact.name }</strong><br>给下面所有的形如 <strong>${xxxxxx }</strong>的两边加上双引号（英文的）。</p>
+<h3 id="2-6更新功能的完善"><a href="#2-6更新功能的完善" class="headerlink" title="2.6更新功能的完善"></a>2.6更新功能的完善</h3><p>在项目的updateContact.jsp中的25行,也就是form表单提交的地方由<strong>AddContactServlet</strong>改为<strong>UpdateContactServlet?id=${contact.id }</strong>,这样就可以完善修改联系人的功能了.</p>
 <h3 id="IT’S-OVER"><a href="#IT’S-OVER" class="headerlink" title="IT’S OVER!!!"></a>IT’S OVER!!!</h3>
       
     </div>
@@ -845,7 +858,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库部分"><span class="nav-number">1.1.</span> <span class="nav-text">数据库部分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2IDE部分"><span class="nav-number">2.</span> <span class="nav-text">2IDE部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1导入项目-按图片来就行了"><span class="nav-number">2.1.</span> <span class="nav-text">2.1导入项目(按图片来就行了)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2导入jar包"><span class="nav-number">2.2.</span> <span class="nav-text">2.2导入jar包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3加入注册驱动"><span class="nav-number">2.3.</span> <span class="nav-text">2.3加入注册驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4缺少斜杠"><span class="nav-number">2.4.</span> <span class="nav-text">2.4缺少斜杠</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5jsp修改"><span class="nav-number">2.5.</span> <span class="nav-text">2.5jsp修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IT’S-OVER"><span class="nav-number">2.6.</span> <span class="nav-text">IT’S OVER!!!</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库部分"><span class="nav-number">1.1.</span> <span class="nav-text">数据库部分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2IDE部分"><span class="nav-number">2.</span> <span class="nav-text">2IDE部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1导入项目-按图片来就行了"><span class="nav-number">2.1.</span> <span class="nav-text">2.1导入项目(按图片来就行了)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2导入jar包"><span class="nav-number">2.2.</span> <span class="nav-text">2.2导入jar包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3加入注册驱动"><span class="nav-number">2.3.</span> <span class="nav-text">2.3加入注册驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4缺少斜杠"><span class="nav-number">2.4.</span> <span class="nav-text">2.4缺少斜杠</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5jsp修改"><span class="nav-number">2.5.</span> <span class="nav-text">2.5jsp修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6更新功能的完善"><span class="nav-number">2.6.</span> <span class="nav-text">2.6更新功能的完善</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IT’S-OVER"><span class="nav-number">2.7.</span> <span class="nav-text">IT’S OVER!!!</span></a></li></ol></li></ol></div>
             
 
           </div>
