@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="true"/>
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="做数据库课设的时候整理的一些javaweb项目的常见错误">
+<meta name="keywords" content="error整理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常见的javaweb错误整理">
+<meta property="og:url" content="http://cheerui.cn/2019/07/09/整理一些常见的javaweb项目错误/index.html">
+<meta property="og:site_name" content="Cheerui&#39;s blog">
+<meta property="og:description" content="做数据库课设的时候整理的一些javaweb项目的常见错误">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://cheerui.cn/2019/07/09/整理一些常见的javaweb项目错误/feiji.jpg">
+<meta property="og:updated_time" content="2019-07-09T15:41:15.582Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常见的javaweb错误整理">
+<meta name="twitter:description" content="做数据库课设的时候整理的一些javaweb项目的常见错误">
+<meta name="twitter:image" content="http://cheerui.cn/2019/07/09/整理一些常见的javaweb项目错误/feiji.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://cheerui.cn/2019/07/09/整理一些常见的javaweb项目错误/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>常见的javaweb错误整理 | Cheerui's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cheerui's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cheerui.cn/2019/07/09/整理一些常见的javaweb项目错误/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cheerui"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/blog.png"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cheerui's blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">常见的javaweb错误整理
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建于：2019-07-09 22:00:00 / 更新于：23:41:15" itemprop="dateCreated datePublished" datetime="2019-07-09T22:00:00+08:00">2019-07-09</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javaweb/" itemprop="url" rel="index"><span itemprop="name">javaweb</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javaweb/错误/" itemprop="url" rel="index"><span itemprop="name">错误</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/09/整理一些常见的javaweb项目错误/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/07/09/整理一些常见的javaweb项目错误/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/07/09/整理一些常见的javaweb项目错误/" class="leancloud_visitors" data-flag-title="常见的javaweb错误整理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/2019/07/09/整理一些常见的javaweb项目错误/feiji.jpg" alt="飞机"></p>
+<h3 id="做数据库课设的时候整理的一些javaweb项目的常见错误"><a href="#做数据库课设的时候整理的一些javaweb项目的常见错误" class="headerlink" title="做数据库课设的时候整理的一些javaweb项目的常见错误"></a>做数据库课设的时候整理的一些javaweb项目的常见错误</h3><a id="more"></a>
+<p><strong> 早就该来总结一波了,时间问题一直没有来(其实是懒),有必要把这些宝贵的经验留下来,以后自己总会再遇到的.</strong></p>
+<h2 id="错误1"><a href="#错误1" class="headerlink" title="错误1"></a>错误1</h2><p> <strong> 报错信息提示</strong>servlet httpservlet<strong>之类的很有可能是缺少servlet包导致的 </strong><br><code>解决方法:从本机上安装的tomcat中的lib目录下找到,放到webroot下的WEB-INF下的lib文件下,并且add to path</code></p>
+<h2 id="错误2"><a href="#错误2" class="headerlink" title="错误2"></a>错误2</h2><ul>
+<li>在控制台(console)中出现255之类的错误,可能是你的<strong>mysql-connector</strong>.jar包和你的数据库版本不匹配(数据库版本过高),还有可能是字符集的问题<br><strong>解决方法:</strong>更换上面说的jar包(换比较高版本的),更换完还不可以就在连接的url后面加<strong>?useUnicode=true&amp;characterEncoding=utf8</strong><h2 id="错误3"><a href="#错误3" class="headerlink" title="错误3"></a>错误3</h2></li>
+<li>出现<strong>Unknown system variable ‘tx_isolation</strong>这种错误<br><strong>解决方法:</strong>这个问题也是由于数据库版本过高,更换<strong>mysql-connector</strong>.jar包,并且在连接url后面加上<strong>?useSSL=false&amp;serverTimezone=UTC</strong>,因为高版本的mysql要验证ssl证书(就是https),这句话的意思就是不验证,后面那个参数不知道什么意思.<h2 id="错误4"><a href="#错误4" class="headerlink" title="错误4"></a>错误4</h2><blockquote>
+<ul>
+<li>这个问题可能出现在一些Spring配置文件中,显示spring…不能被解析<br><strong>解决方法:</strong>去官网下载,导入相应的包就可以了</li>
+</ul>
+</blockquote>
+<h2 id="错误5"><a href="#错误5" class="headerlink" title="错误5"></a>错误5</h2></li>
+<li>Unable to compile class for JSP:错误<br><strong>解决方法:</strong>这个错误是因为tomcat的jdk比项目所用jdk的版本低的原因,更换更高版本的tomcat服务器,或者降低项目所用的jdk版本.<h2 id="错误6"><a href="#错误6" class="headerlink" title="错误6"></a>错误6</h2></li>
+<li>(java.lang.ClassCastException: java.math.BigInteger cannot be cast to java.lang.Long)<br><strong>解决方法:</strong>还是MySQL数据库版本问题,修改<strong>mysql-connector</strong>.jar包就可以了.<h2 id="错误7"><a href="#错误7" class="headerlink" title="错误7"></a>错误7</h2></li>
+<li>当你发现在本地的项目可以跑,但是把项目发布到服务器上(linux),并且在服务器上建立数据库跑的时候,发现项目可以跑起来,但是有些数据却得不到,比如说在登陆的时候,明明输入了正确的信息,但就是进不去.<br><strong>解决方法:</strong>1.因为在linux中是分大小写的,所以数据库的表名也是分大小写,打开并修改 /etc/my.cnf；在[mysqld]节点下，加入一行： lower_case_table_names=1,然后重启下mysql,基本上就可以了.<h2 id="错误8"><a href="#错误8" class="headerlink" title="错误8"></a>错误8</h2></li>
+<li>还有一种错误也是提供正确的登陆信息但进不去主页.<br><strong>解决方法:</strong>很可能是项目的编码不对,修改下编码,这个错误出现的原因是登陆页面在验证的时候直接用equals(“”)这种方法验证.<h5 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h5>还有一个关于链表的知识明天在写把,考研的人要早睡早起呀!!!</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>咦~~~~ 这是嘛呀!!!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.png" alt="Cheerui 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/zhi.png" alt="Cheerui 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/error整理/" rel="tag"># error整理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/04/人生之两大转折/" rel="next" title="人生--两大转折">
+                <i class="fa fa-chevron-left"></i> 人生--两大转折
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/blog.png"
+                alt="Cheerui"/>
+            
+              <p class="site-author-name" itemprop="name">Cheerui</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/cheerui/cheerui.github.io" title="GitHub &rarr; https://github.com/cheerui/cheerui.github.io" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:cheerui@163.com" title="E-Mail &rarr; mailto:cheerui@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://wpa.qq.com/msgrd?v=3&uin=1574225054&site=qq&menu=yes" title="QQ &rarr; http://wpa.qq.com/msgrd?v=3&uin=1574225054&site=qq&menu=yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+<script type="text/javascript" src="//fold_action.js?v=6.7.0"></script>
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#做数据库课设的时候整理的一些javaweb项目的常见错误"><span class="nav-number">1.</span> <span class="nav-text">做数据库课设的时候整理的一些javaweb项目的常见错误</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误1"><span class="nav-number"></span> <span class="nav-text">错误1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误2"><span class="nav-number"></span> <span class="nav-text">错误2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误3"><span class="nav-number"></span> <span class="nav-text">错误3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误4"><span class="nav-number"></span> <span class="nav-text">错误4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误5"><span class="nav-number"></span> <span class="nav-text">错误5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误6"><span class="nav-number"></span> <span class="nav-text">错误6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误7"><span class="nav-number"></span> <span class="nav-text">错误7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误8"><span class="nav-number"></span> <span class="nav-text">错误8</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#写在最后"><span class="nav-number">0.0.1.</span> <span class="nav-text">写在最后</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cheerui</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+<script type="text/javascript" src="https://s5.cnzz.com/z_stat.php?id=1276082497&web_id=1276082497"></script>
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  <script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  <script>
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item) > -1;
+    });
+    new Valine({
+      el: '#comments' ,
+      verify: false,
+      notify: false,
+      appId: 'YAE8atG45i4IVe1seKJz4v8o-gzGzoHsz',
+      appKey: 'etuyqRI072jtpd5zIs2xapyl',
+      placeholder: '~~Just go go~~',
+      avatar: 'wavatar',
+      meta:guest,
+      pageSize: '10' || 10,
+      visitor: false
+    });
+  </script>
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "YAE8atG45i4IVe1seKJz4v8o-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "YAE8atG45i4IVe1seKJz4v8o-gzGzoHsz",
+                'X-LC-Key': "etuyqRI072jtpd5zIs2xapyl",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+<!-- ����鸴�ƹ��� -->
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"live2d-widget-model-hijiki"},"display":{"superSample":2,"width":120,"height":200,"position":"left","hOffset":0,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
