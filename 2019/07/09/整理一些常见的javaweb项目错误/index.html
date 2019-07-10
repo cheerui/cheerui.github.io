@@ -105,7 +105,7 @@
 <meta property="og:description" content="做数据库课设的时候整理的一些javaweb项目的常见错误">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://cheerui.cn/2019/07/09/整理一些常见的javaweb项目错误/feiji.jpg">
-<meta property="og:updated_time" content="2019-07-09T15:55:03.366Z">
+<meta property="og:updated_time" content="2019-07-10T09:27:13.130Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常见的javaweb错误整理">
 <meta name="twitter:description" content="做数据库课设的时候整理的一些javaweb项目的常见错误">
@@ -385,12 +385,24 @@
                 
               
 
-              <time title="创建于：2019-07-09 22:00:00 / 更新于：23:55:03" itemprop="dateCreated datePublished" datetime="2019-07-09T22:00:00+08:00">2019-07-09</time>
+              <time title="创建于：2019-07-09 22:00:00" itemprop="dateCreated datePublished" datetime="2019-07-09T22:00:00+08:00">2019-07-09</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="更新于：2019-07-10 17:27:13" itemprop="dateModified" datetime="2019-07-10T17:27:13+08:00">2019-07-10</time>
               
             
           </span>
@@ -472,7 +484,7 @@
         <p><img src="/2019/07/09/整理一些常见的javaweb项目错误/feiji.jpg" alt="飞机"></p>
 <h3 id="做数据库课设的时候整理的一些javaweb项目的常见错误"><a href="#做数据库课设的时候整理的一些javaweb项目的常见错误" class="headerlink" title="做数据库课设的时候整理的一些javaweb项目的常见错误"></a>做数据库课设的时候整理的一些javaweb项目的常见错误</h3><a id="more"></a>
 <p><strong> 早就该来总结一波了,时间问题一直没有来(其实是懒),有必要把这些宝贵的经验留下来,以后自己总会再遇到的.</strong></p>
-<h2 id="错误1"><a href="#错误1" class="headerlink" title="错误1"></a>错误1</h2><p> <strong> 报错信息提示</strong>servlet httpservlet<strong>之类的很有可能是缺少servlet包导致的 </strong><br><code>解决方法:从本机上安装的tomcat中的lib目录下找到,放到webroot下的WEB-INF下的lib文件下,并且add to path</code></p>
+<h2 id="错误1"><a href="#错误1" class="headerlink" title="错误1"></a>错误1</h2><p> <strong> 报错信息提示</strong>servlet httpservlet<strong>之类的很有可能是缺少servlet包导致的 </strong><br><code>解决方法:从本机上安装的tomcat中的lib目录下找到servlet-api.jar包,放到webroot下的WEB-INF下的lib文件下,并且add to path</code></p>
 <h2 id="错误2"><a href="#错误2" class="headerlink" title="错误2"></a>错误2</h2><p> <strong>  在控制台(console)中出现255之类的错误,可能是你的</strong>mysql-connector<strong>.jar包和你的数据库版本不匹配(数据库版本过高),还有可能是字符集的问题 </strong><br><code>解决方法:更换上面说的jar包(换比较高版本的),更换完还不可以就在连接的url后面加?useUnicode=true&amp;characterEncoding=utf8</code></p>
 <h2 id="错误3"><a href="#错误3" class="headerlink" title="错误3"></a>错误3</h2><p> <strong>  出现</strong>Unknown system variable ‘tx_isolation<strong>这种错误 </strong><br><code>解决方法:这个问题也是由于数据库版本过高,更换mysql-connector.jar包,并且在连接url后面加上?useSSL=false&amp;amp;serverTimezone=UTC,因为高版本的mysql要验证ssl证书(就是https),这句话的意思就是不验证,后面那个参数不知道什么意思.</code></p>
 <h2 id="错误4"><a href="#错误4" class="headerlink" title="错误4"></a>错误4</h2><p> <strong>  这个问题可能出现在一些Spring配置文件中,显示spring…不能被解析 </strong><br><code>解决方法:去官网下载,导入相应的包就可以了</code></p>
