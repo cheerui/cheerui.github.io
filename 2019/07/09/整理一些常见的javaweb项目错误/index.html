@@ -105,7 +105,7 @@
 <meta property="og:description" content="做数据库课设的时候整理的一些javaweb项目的常见错误">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://cheerui.cn/2019/07/09/整理一些常见的javaweb项目错误/feiji.jpg">
-<meta property="og:updated_time" content="2019-07-09T15:41:15.582Z">
+<meta property="og:updated_time" content="2019-07-09T15:55:03.366Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常见的javaweb错误整理">
 <meta name="twitter:description" content="做数据库课设的时候整理的一些javaweb项目的常见错误">
@@ -385,7 +385,7 @@
                 
               
 
-              <time title="创建于：2019-07-09 22:00:00 / 更新于：23:41:15" itemprop="dateCreated datePublished" datetime="2019-07-09T22:00:00+08:00">2019-07-09</time>
+              <time title="创建于：2019-07-09 22:00:00 / 更新于：23:55:03" itemprop="dateCreated datePublished" datetime="2019-07-09T22:00:00+08:00">2019-07-09</time>
             
 
             
@@ -473,19 +473,14 @@
 <h3 id="做数据库课设的时候整理的一些javaweb项目的常见错误"><a href="#做数据库课设的时候整理的一些javaweb项目的常见错误" class="headerlink" title="做数据库课设的时候整理的一些javaweb项目的常见错误"></a>做数据库课设的时候整理的一些javaweb项目的常见错误</h3><a id="more"></a>
 <p><strong> 早就该来总结一波了,时间问题一直没有来(其实是懒),有必要把这些宝贵的经验留下来,以后自己总会再遇到的.</strong></p>
 <h2 id="错误1"><a href="#错误1" class="headerlink" title="错误1"></a>错误1</h2><p> <strong> 报错信息提示</strong>servlet httpservlet<strong>之类的很有可能是缺少servlet包导致的 </strong><br><code>解决方法:从本机上安装的tomcat中的lib目录下找到,放到webroot下的WEB-INF下的lib文件下,并且add to path</code></p>
-<h2 id="错误2"><a href="#错误2" class="headerlink" title="错误2"></a>错误2</h2><ul>
-<li>在控制台(console)中出现255之类的错误,可能是你的<strong>mysql-connector</strong>.jar包和你的数据库版本不匹配(数据库版本过高),还有可能是字符集的问题<br><strong>解决方法:</strong>更换上面说的jar包(换比较高版本的),更换完还不可以就在连接的url后面加<strong>?useUnicode=true&amp;characterEncoding=utf8</strong><h2 id="错误3"><a href="#错误3" class="headerlink" title="错误3"></a>错误3</h2></li>
-<li>出现<strong>Unknown system variable ‘tx_isolation</strong>这种错误<br><strong>解决方法:</strong>这个问题也是由于数据库版本过高,更换<strong>mysql-connector</strong>.jar包,并且在连接url后面加上<strong>?useSSL=false&amp;serverTimezone=UTC</strong>,因为高版本的mysql要验证ssl证书(就是https),这句话的意思就是不验证,后面那个参数不知道什么意思.<h2 id="错误4"><a href="#错误4" class="headerlink" title="错误4"></a>错误4</h2><blockquote>
-<ul>
-<li>这个问题可能出现在一些Spring配置文件中,显示spring…不能被解析<br><strong>解决方法:</strong>去官网下载,导入相应的包就可以了</li>
-</ul>
-</blockquote>
-<h2 id="错误5"><a href="#错误5" class="headerlink" title="错误5"></a>错误5</h2></li>
-<li>Unable to compile class for JSP:错误<br><strong>解决方法:</strong>这个错误是因为tomcat的jdk比项目所用jdk的版本低的原因,更换更高版本的tomcat服务器,或者降低项目所用的jdk版本.<h2 id="错误6"><a href="#错误6" class="headerlink" title="错误6"></a>错误6</h2></li>
-<li>(java.lang.ClassCastException: java.math.BigInteger cannot be cast to java.lang.Long)<br><strong>解决方法:</strong>还是MySQL数据库版本问题,修改<strong>mysql-connector</strong>.jar包就可以了.<h2 id="错误7"><a href="#错误7" class="headerlink" title="错误7"></a>错误7</h2></li>
-<li>当你发现在本地的项目可以跑,但是把项目发布到服务器上(linux),并且在服务器上建立数据库跑的时候,发现项目可以跑起来,但是有些数据却得不到,比如说在登陆的时候,明明输入了正确的信息,但就是进不去.<br><strong>解决方法:</strong>1.因为在linux中是分大小写的,所以数据库的表名也是分大小写,打开并修改 /etc/my.cnf；在[mysqld]节点下，加入一行： lower_case_table_names=1,然后重启下mysql,基本上就可以了.<h2 id="错误8"><a href="#错误8" class="headerlink" title="错误8"></a>错误8</h2></li>
-<li>还有一种错误也是提供正确的登陆信息但进不去主页.<br><strong>解决方法:</strong>很可能是项目的编码不对,修改下编码,这个错误出现的原因是登陆页面在验证的时候直接用equals(“”)这种方法验证.<h5 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h5>还有一个关于链表的知识明天在写把,考研的人要早睡早起呀!!!</li>
-</ul>
+<h2 id="错误2"><a href="#错误2" class="headerlink" title="错误2"></a>错误2</h2><p> <strong>  在控制台(console)中出现255之类的错误,可能是你的</strong>mysql-connector<strong>.jar包和你的数据库版本不匹配(数据库版本过高),还有可能是字符集的问题 </strong><br><code>解决方法:更换上面说的jar包(换比较高版本的),更换完还不可以就在连接的url后面加?useUnicode=true&amp;characterEncoding=utf8</code></p>
+<h2 id="错误3"><a href="#错误3" class="headerlink" title="错误3"></a>错误3</h2><p> <strong>  出现</strong>Unknown system variable ‘tx_isolation<strong>这种错误 </strong><br><code>解决方法:这个问题也是由于数据库版本过高,更换mysql-connector.jar包,并且在连接url后面加上?useSSL=false&amp;amp;serverTimezone=UTC,因为高版本的mysql要验证ssl证书(就是https),这句话的意思就是不验证,后面那个参数不知道什么意思.</code></p>
+<h2 id="错误4"><a href="#错误4" class="headerlink" title="错误4"></a>错误4</h2><p> <strong>  这个问题可能出现在一些Spring配置文件中,显示spring…不能被解析 </strong><br><code>解决方法:去官网下载,导入相应的包就可以了</code></p>
+<h2 id="错误5"><a href="#错误5" class="headerlink" title="错误5"></a>错误5</h2><p> <strong>  Unable to compile class for JSP:错误 </strong><br><code>解决方法:这个错误是因为tomcat的jdk比项目所用jdk的版本低的原因,更换更高版本的tomcat服务器,或者降低项目所用的jdk版本.</code></p>
+<h2 id="错误6"><a href="#错误6" class="headerlink" title="错误6"></a>错误6</h2><p> <strong>  (java.lang.ClassCastException: java.math.BigInteger cannot be cast to java.lang.Long) </strong><br><code>解决方法:还是MySQL数据库版本问题,修改mysql-connector.jar包就可以了.</code></p>
+<h2 id="错误7"><a href="#错误7" class="headerlink" title="错误7"></a>错误7</h2><p> <strong>  当你发现在本地的项目可以跑,但是把项目发布到服务器上(linux),并且在服务器上建立数据库跑的时候,发现项目可以跑起来,但是有些数据却得不到,比如说在登陆的时候,明明输入了正确的信息,但就是进不去. </strong><br><code>解决方法:因为在linux中是分大小写的,所以数据库的表名也是分大小写,打开并修改 /etc/my.cnf；在[mysqld]节点下，加入一行： lower_case_table_names=1,然后重启下mysql,基本上就可以了.</code></p>
+<h2 id="错误8"><a href="#错误8" class="headerlink" title="错误8"></a>错误8</h2><p> <strong>  还有一种错误也是提供正确的登陆信息但进不去主页. </strong><br><code>解决方法:很可能是项目的编码不对,修改下编码,这个错误出现的原因是登陆页面在验证的时候直接用equals(&quot;&quot;)这种方法验证.</code></p>
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p> <strong> 还有一个关于链表的知识明天在写把,考研的人要早睡早起呀!!! </strong></p>
 
       
     </div>
@@ -851,7 +846,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#做数据库课设的时候整理的一些javaweb项目的常见错误"><span class="nav-number">1.</span> <span class="nav-text">做数据库课设的时候整理的一些javaweb项目的常见错误</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误1"><span class="nav-number"></span> <span class="nav-text">错误1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误2"><span class="nav-number"></span> <span class="nav-text">错误2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误3"><span class="nav-number"></span> <span class="nav-text">错误3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误4"><span class="nav-number"></span> <span class="nav-text">错误4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误5"><span class="nav-number"></span> <span class="nav-text">错误5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误6"><span class="nav-number"></span> <span class="nav-text">错误6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误7"><span class="nav-number"></span> <span class="nav-text">错误7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误8"><span class="nav-number"></span> <span class="nav-text">错误8</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#写在最后"><span class="nav-number">0.0.1.</span> <span class="nav-text">写在最后</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#做数据库课设的时候整理的一些javaweb项目的常见错误"><span class="nav-number">1.</span> <span class="nav-text">做数据库课设的时候整理的一些javaweb项目的常见错误</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误1"><span class="nav-number"></span> <span class="nav-text">错误1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误2"><span class="nav-number"></span> <span class="nav-text">错误2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误3"><span class="nav-number"></span> <span class="nav-text">错误3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误4"><span class="nav-number"></span> <span class="nav-text">错误4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误5"><span class="nav-number"></span> <span class="nav-text">错误5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误6"><span class="nav-number"></span> <span class="nav-text">错误6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误7"><span class="nav-number"></span> <span class="nav-text">错误7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误8"><span class="nav-number"></span> <span class="nav-text">错误8</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在最后"><span class="nav-number">1.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
             
 
           </div>
